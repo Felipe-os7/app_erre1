@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="contact-form-container">
+  <h1>Enviar Mural</h1>
+  <p style="text-align: center; color: var(--gray-muted); margin-bottom: 48px; font-weight: 300; letter-spacing: 0.5px;">
+    El envío será revisado por el administrador antes de publicarlo.
+  </p>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div class="form-group mb-3">
+      <label for="{{ form.title.id_for_label }}" class="form-label">{{ form.title.label }}</label>
+      {{ form.title }}
+      {% if form.title.errors %}
+        <div class="text-danger" style="font-size: 12px; margin-top: 4px;">
+          {{ form.title.errors }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="{{ form.description.id_for_label }}" class="form-label">{{ form.description.label }}</label>
+      {{ form.description }}
+      {% if form.description.errors %}
+        <div class="text-danger" style="font-size: 12px; margin-top: 4px;">
+          {{ form.description.errors }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="{{ form.image.id_for_label }}" class="form-label">{{ form.image.label }}</label>
+      {{ form.image }}
+      {% if form.image.errors %}
+        <div class="text-danger" style="font-size: 12px; margin-top: 4px;">
+          {{ form.image.errors }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="{{ form.location.id_for_label }}" class="form-label">{{ form.location.label }}</label>
+      {{ form.location }}
+      {% if form.location.help_text %}
+        <small class="form-text" style="color: var(--gray-muted); font-size: 12px; display: block; margin-top: 4px; font-weight: 300;">
+          {{ form.location.help_text }}
+        </small>
+      {% endif %}
+      {% if form.location.errors %}
+        <div class="text-danger" style="font-size: 12px; margin-top: 4px;">
+          {{ form.location.errors }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mb-3">
+          <label for="{{ form.technique.id_for_label }}" class="form-label">{{ form.technique.label }}</label>
+          {{ form.technique }}
+          {% if form.technique.errors %}
+            <div class="text-danger" style="font-size: 12px; margin-top: 4px;">
+              {{ form.technique.errors }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group mb-3">
+          <label for="{{ form.dimensions.id_for_label }}" class="form-label">{{ form.dimensions.label }}</label>
+          {{ form.dimensions }}
+          {% if form.dimensions.errors %}
+            <div class="text-danger" style="font-size: 12px; margin-top: 4px;">
+              {{ form.dimensions.errors }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mb-3">
+          <label for="{{ form.year.id_for_label }}" class="form-label">{{ form.year.label }}</label>
+          {{ form.year }}
+          {% if form.year.errors %}
+            <div class="text-danger" style="font-size: 12px; margin-top: 4px;">
+              {{ form.year.errors }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100 mt-3">Enviar Mural</button>
+  </form>
+</div>
+{% endblock %}
+

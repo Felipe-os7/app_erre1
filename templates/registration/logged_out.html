@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="contact-form-container" style="text-align: center;">
+  <h1>Has Salido</h1>
+  <p style="font-size: 1.1rem; color: var(--gray-muted); margin-bottom: 32px;">
+    Has cerrado sesión correctamente.
+  </p>
+  <a href="{% url 'home' %}" class="btn btn-primary" style="text-decoration: none; display: inline-block;">Volver al Inicio</a>
+</div>
+{% endblock %}

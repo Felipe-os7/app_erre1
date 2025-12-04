@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="contact-form-container">
+  <h1>Eliminar {{ item_type|capfirst }}</h1>
+  <p style="text-align: center; color: var(--gray-muted); margin-bottom: 48px; font-weight: 300; letter-spacing: 0.5px;">
+    ¿Estás seguro de que deseas eliminar "{{ item.title }}"?
+  </p>
+  <p style="text-align: center; color: var(--gray-muted); margin-bottom: 48px;">
+    Esta acción no se puede deshacer.
+  </p>
+  
+  <form method="post" style="max-width: 400px; margin: 0 auto;">
+    {% csrf_token %}
+    <div style="display: flex; gap: 12px; justify-content: center;">
+      <button type="submit" class="btn btn-primary" style="background-color: #dc3545; border-color: #dc3545;">
+        Sí, eliminar
+      </button>
+      <a href="{% url cancel_url %}" class="btn btn-secondary" style="text-decoration: none; display: inline-block;">
+        Cancelar
+      </a>
+    </div>
+  </form>
+</div>
+{% endblock %}
+

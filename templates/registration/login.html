@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="contact-form-container" style="max-width: 500px;">
+  <h1>Login</h1>
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary w-100 mt-3">Entrar</button>
+  </form>
+  <p style="text-align: center; margin-top: 20px; color: var(--gray-muted);">
+    ¿No tienes cuenta? <a href="{% url 'admin:index' %}" style="color: var(--mustard-dark); font-weight: 600;">Contacta al administrador</a>
+  </p>
+</div>
+{% endblock %}

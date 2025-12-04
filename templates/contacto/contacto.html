@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static currency %}
+
+{% block content %}
+<div class="contact-form-container">
+  <h1>Contacto</h1>
+  <p style="text-align: center; color: var(--gray-muted); margin-bottom: 48px; font-weight: 300; letter-spacing: 0.5px;">
+    Completa el formulario y nos pondremos en contacto contigo lo antes posible.
+  </p>
+
+  <!-- Carrito de Cotización -->
+  <div class="cart-section" style="margin-bottom: 40px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <h2 style="margin: 0;">Carrito de Cotización</h2>
+      {% if cart %}
+        <form method="post" action="{% url 'contacto:clear_cart' %}" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-sm" style="background: var(--gray-muted); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+            Vaciar Carrito
+          </button>
+        </form>
+      {% endif %}
+    </div>
+
+    {% if cart %}
+      <div class="cart-items" style="background: var(--gray-light); border: 2px solid var(--black); border-radius: 8px; padding: 24px; margin-bottom: 20px;">
+        {% for item in cart %}
+          <div class="cart-item" style="display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--gray-border);">
+            <div style="flex: 1;">
+              <strong>{{ item.title }}</strong>
+              <span style="color: var(--gray-muted); font-size: 14px; margin-left: 12px;">
+                ({{ item.type|capfirst }})
+              </span>
+              {% if item.price %}
+                <div style="margin-top: 4px; color: var(--mustard-dark); font-weight: 600;">
+                  {{ item.price|clp }} CLP
+                </div>
+              {% endif %}
+            </div>
+            <form method="post" action="{% url 'contacto:remove_from_cart' item.type item.id %}" style="display: inline; margin-left: 16px;">
+              {% csrf_token %}
+              <button type="submit" style="background: transparent; border: 1px solid var(--gray-muted); color: var(--gray-muted); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 14px;">
+                Eliminar
+              </button>
+            </form>
+          </div>
+        {% endfor %}
+        
+        {% if cart_total > 0 %}
+          <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid var(--black); display: flex; justify-content: space-between; align-items: center;">
+            <strong style="font-size: 18px;">Total:</strong>
+            <strong style="font-size: 20px; color: var(--mustard-dark);">{{ cart_total|clp }} CLP</strong>
+          </div>
+        {% endif %}
+      </div>
+      <p style="color: var(--gray-muted); font-size: 14px; margin-bottom: 24px;">
+        Los items del carrito se incluirán automáticamente en tu mensaje de cotización.
+      </p>
+    {% else %}
+      <div style="background: var(--gray-light); border: 2px solid var(--gray-border); border-radius: 8px; padding: 40px; text-align: center;">
+        <p style="color: var(--gray-muted); margin: 0;">Tu carrito está vacío. Agrega pinturas o murales desde la <a href="{% url 'galeria:gallery_list' %}" style="color: var(--mustard-dark);">Galería</a> o <a href="{% url 'mural:mural_list' %}" style="color: var(--mustard-dark);">Murales</a>.</p>
+      </div>
+    {% endif %}
+  </div>
+
+  {% crispy form %}
+
+  <div class="contact-info">
+    <h3>Información</h3>
+    <p><strong>Email:</strong> contacto@errearte.com</p>
+    <p><strong>Horario:</strong> Lunes a Viernes, 9:00 - 18:00</p>
+    <p style="margin-top: 20px;">Estamos aquí para ayudarte con cualquier consulta sobre nuestros servicios de arte visual y muralismo.</p>
+  </div>
+</div>
+
+<script>
+// Función para agregar al carrito con AJAX
+function addToCart(itemType, itemId) {
+  fetch(`/contacto/cart/add/${itemType}/${itemId}/`, {
+    method: 'GET',
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+    },
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert(data.message);
+      // Recargar la página para actualizar el carrito
+      window.location.reload();
+    } else {
+      alert(data.message);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Error al agregar al carrito');
+  });
+}
+</script>
+{% endblock %}

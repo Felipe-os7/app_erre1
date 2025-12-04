@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="contact-form-container">
+  <div style="text-align: center; padding: 60px 20px;">
+    <div style="font-size: 64px; margin-bottom: 24px;">✓</div>
+    <h1 style="margin-bottom: 24px;">¡Cotización Enviada!</h1>
+    <p style="color: var(--gray-muted); font-size: 1.1rem; margin-bottom: 40px; line-height: 1.8;">
+      Hemos recibido tu solicitud de cotización para mural.<br>
+      Te contactaremos pronto con una propuesta personalizada.
+    </p>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="{% url 'mural:mural_list' %}" class="btn btn-primary" style="text-decoration: none; display: inline-block;">
+        Ver Murales
+      </a>
+      <a href="{% url 'home' %}" class="btn btn-secondary" style="text-decoration: none; display: inline-block;">
+        Volver al Inicio
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

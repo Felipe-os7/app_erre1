@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="contact-form-container">
+  <h1>Cotización de Mural</h1>
+  <p style="text-align: center; color: var(--gray-muted); margin-bottom: 48px; font-weight: 300; letter-spacing: 0.5px;">
+    Completa el formulario con los detalles de tu proyecto para recibir una cotización personalizada.
+  </p>
+  
+  <div style="background: var(--gray-light); border: 2px solid var(--gray-border); border-radius: 8px; padding: 24px; margin-bottom: 32px;">
+    <h3 style="margin-top: 0; font-size: 1.1rem; margin-bottom: 16px;">Información de Cotización Estándar</h3>
+    <div style="font-size: 14px; color: var(--gray-muted); line-height: 1.8;">
+      <p><strong>DIMENSIONES TÉCNICAS:</strong></p>
+      <ul style="margin-left: 20px; margin-bottom: 16px;">
+        <li>Superficie: Muro exterior/interior</li>
+        <li>Técnica: Pintura acrílica de alta calidad, resistente a intemperie</li>
+        <li>Preparación: Limpieza y preparación de superficie incluida</li>
+        <li>Protección: Barniz protector UV (opcional)</li>
+      </ul>
+      <p><strong>DETALLES:</strong></p>
+      <ul style="margin-left: 20px; margin-bottom: 16px;">
+        <li>Diseño personalizado según requerimientos</li>
+        <li>Incluye: Diseño, preparación de superficie, ejecución y limpieza</li>
+        <li>Tiempo estimado: Variable según dimensiones y complejidad</li>
+        <li>Garantía: 2 años en materiales y mano de obra</li>
+      </ul>
+      <p style="margin: 0;"><strong>NOTA:</strong> La cotización final dependerá de las dimensiones específicas, ubicación y complejidad del diseño. Se requiere visita técnica para evaluación precisa del espacio.</p>
+    </div>
+  </div>
+
+  {% crispy form %}
+</div>
+{% endblock %}
+

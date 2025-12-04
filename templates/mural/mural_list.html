@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static currency %}
+
+{% block content %}
+<script>
+function addToCart(itemType, itemId) {
+  fetch(`/contacto/cart/add/${itemType}/`, {
+    method: 'GET',
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+    },
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert(data.message);
+      if (confirm('¿Deseas ir al carrito de cotización?')) {
+        window.location.href = '{% url "contacto:contacto" %}';
+      }
+    } else {
+      alert(data.message);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Error al agregar al carrito');
+  });
+}
+</script>
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; flex-wrap: wrap; gap: 24px;">
+    <h1 style="margin: 0;">Murales</h1>
+    {% if user.is_authenticated %}
+      <a href="{% url 'mural:submit_mural' %}" class="btn btn-primary" style="text-decoration: none; display: inline-block;">Enviar Mural</a>
+    {% endif %}
+  </div>
+  <div style="margin-top: 20px; margin-bottom: 40px; text-align: center; padding: 20px; background: var(--gray-light); border-radius: 8px; border: 2px solid var(--gray-border);">
+      <a href="{% url 'mural:send_standard_quote' %}" class="btn btn-secondary" style="text-decoration: none; display: inline-block;">Enviar Cotización</a>
+      <p style="margin-top: 12px; font-size: 14px; color: var(--gray-muted);">Solicita una cotización estándar con dimensiones técnicas y detalles</p>
+  </div>
+  <div class="grid">
+    {% for m in murals %}
+      <article class="card" style="display: flex; flex-direction: column; height: 100%;">
+        <div style="flex-grow: 1;">
+          {% if m.image %}
+            <a class="lightbox" href="{{ m.image.url }}"><img src="{{ m.image.url }}" alt="{{ m.title }}"></a>
+          {% else %}
+            <img src="{% static 'img/placeholder.png' %}" alt="{{ m.title }}">
+          {% endif %}
+          <h3>{{ m.title }}</h3>
+          {% if m.description %}<p class="meta">{{ m.description }}</p>{% endif %}
+          <p class="meta"><strong>Ubicación:</strong> {{ m.location }}</p>
+          <p class="meta">{% if m.technique %}Técnica: {{ m.technique }} • {% endif %}{% if m.year %}Año: {{ m.year }}{% endif %}</p>
+          {% if user.is_authenticated %}
+            <form method="post" action="{% url 'mural:delete_mural' m.id %}" style="margin-top: 12px;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este mural?');">
+              {% csrf_token %}
+              <button type="submit" class="btn" style="width: 100%; padding: 8px; font-size: 12px; cursor: pointer; background-color: #dc3545; color: white; border: none;">
+                Eliminar
+              </button>
+            </form>
+          {% endif %}
+        </div>
+      </article>
+    {% empty %}
+      <div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: var(--gray-light); border-radius: 8px; border: 2px solid var(--black);">
+        <p style="font-size: 1.1rem; color: var(--gray-muted);">No hay murales disponibles.</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

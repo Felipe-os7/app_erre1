@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="contact-form-container" style="text-align: center;">
+  <h1>Envío Recibido</h1>
+  <div class="alert-success" style="margin-bottom: 32px;">
+    <strong>¡Gracias!</strong> Tu obra ha sido publicada.
+  </div>
+  <a href="{% url 'galeria:gallery_list' %}" class="btn btn-primary" style="text-decoration: none; display: inline-block;">Volver a la Galería</a>
+</div>
+{% endblock %}

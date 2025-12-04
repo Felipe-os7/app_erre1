@@ -1,0 +1,971 @@
+:root {
+	--mustard: #D4A574;
+	--mustard-dark: #B8945F;
+	--mustard-light: #E8C99A;
+	--black: #111217;
+	--white: #FFFFFF;
+	--gray-light: #F8F8F8;
+	--gray-muted: #6b6b6b;
+	--gray-border: #E5E5E5;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	background: var(--white);
+	color: var(--black);
+	line-height: 1.6;
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 24px;
+}
+
+/* Header Minimalista */
+.site-header {
+	background: var(--white);
+	border-bottom: 1px solid var(--gray-border);
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	backdrop-filter: blur(10px);
+	background: rgba(255, 255, 255, 0.95);
+}
+
+.nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px 0;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	transition: opacity 0.3s ease;
+}
+
+.logo img {
+	height: 45px;
+	width: auto;
+	display: block;
+}
+
+.logo:hover {
+	opacity: 0.7;
+}
+
+.nav-left {
+	display: flex;
+	align-items: center;
+	gap: 40px;
+}
+
+.nav-left a {
+	color: var(--black);
+	text-decoration: none;
+	font-weight: 400;
+	font-size: 15px;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	transition: color 0.3s ease;
+	position: relative;
+	padding: 4px 0;
+}
+
+.nav-left a::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0;
+	height: 1px;
+	background: var(--mustard);
+	transition: width 0.3s ease;
+}
+
+.nav-left a:hover {
+	color: var(--black);
+}
+
+.nav-left a:hover::after {
+	width: 100%;
+}
+
+.nav-right {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	font-size: 14px;
+}
+
+.nav-right span {
+	color: var(--gray-muted);
+}
+
+.nav-right a {
+	color: var(--black);
+	text-decoration: none;
+	transition: color 0.3s ease;
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.nav-right a:hover {
+	color: var(--mustard);
+}
+
+.link-button {
+	background: none;
+	border: none;
+	color: var(--black);
+	text-decoration: none;
+	cursor: pointer;
+	font: inherit;
+	padding: 0;
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	transition: color 0.3s ease;
+}
+
+.link-button:hover {
+	color: var(--mustard);
+}
+
+/* Main Content - Minimalista */
+main {
+	margin: 60px auto;
+	min-height: calc(100vh - 200px);
+}
+
+/* Typography Minimalista */
+h1, h2, h3, h4, h5, h6 {
+	color: var(--black);
+	margin-top: 0;
+	font-weight: 300;
+	letter-spacing: 1px;
+}
+
+h1 {
+	font-size: 3rem;
+	margin-bottom: 40px;
+	font-weight: 200;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+}
+
+h2 {
+	font-size: 2rem;
+	margin-bottom: 32px;
+	font-weight: 300;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+h3 {
+	font-size: 1.5rem;
+	margin-bottom: 24px;
+	font-weight: 400;
+	letter-spacing: 1px;
+}
+
+/* Cards Minimalistas */
+.card {
+	background: var(--white);
+	padding: 0;
+	border-radius: 0;
+	border: 1px solid var(--gray-border);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	overflow: hidden;
+	position: relative;
+}
+
+.card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.card img {
+	width: 100%;
+	height: 280px;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.5s ease;
+}
+
+.card:hover img {
+	transform: scale(1.05);
+}
+
+.card-content {
+	padding: 24px;
+}
+
+.card h3 {
+	margin: 0 0 12px 0;
+	font-size: 1.1rem;
+	font-weight: 400;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.card p {
+	margin: 8px 0;
+	color: var(--gray-muted);
+	font-size: 0.9rem;
+	line-height: 1.6;
+}
+
+/* Grid Minimalista */
+.grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 32px;
+	margin: 40px 0;
+}
+
+/* Filters Minimalistas */
+.filters {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+	margin: 32px 0;
+	flex-wrap: wrap;
+	padding: 24px;
+	background: var(--gray-light);
+	border: 1px solid var(--gray-border);
+}
+
+.filters label {
+	font-weight: 400;
+	color: var(--black);
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.filters select {
+	padding: 10px 16px;
+	border: 1px solid var(--gray-border);
+	border-radius: 0;
+	background: var(--white);
+	color: var(--black);
+	font-size: 14px;
+	cursor: pointer;
+	transition: border-color 0.3s ease;
+	font-family: inherit;
+}
+
+.filters select:hover,
+.filters select:focus {
+	border-color: var(--mustard);
+	outline: none;
+}
+
+.filters button {
+	padding: 10px 24px;
+	background: var(--black);
+	color: var(--white);
+	border: 1px solid var(--black);
+	border-radius: 0;
+	cursor: pointer;
+	font-weight: 400;
+	transition: all 0.3s ease;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 13px;
+	font-family: inherit;
+}
+
+.filters button:hover {
+	background: var(--white);
+	color: var(--black);
+}
+
+/* Pagination Minimalista */
+.pagination {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+	justify-content: center;
+	margin-top: 60px;
+	padding: 24px;
+}
+
+.pagination a {
+	color: var(--black);
+	text-decoration: none;
+	font-weight: 400;
+	padding: 10px 20px;
+	border: 1px solid var(--gray-border);
+	transition: all 0.3s ease;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 13px;
+}
+
+.pagination a:hover {
+	border-color: var(--black);
+	background: var(--black);
+	color: var(--white);
+}
+
+.pagination span {
+	font-weight: 400;
+	color: var(--gray-muted);
+	font-size: 14px;
+}
+
+/* Collection List Minimalista */
+.collection-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 24px;
+	margin-bottom: 60px;
+}
+
+.collection {
+	background: var(--white);
+	border: 1px solid var(--gray-border);
+	padding: 0;
+	display: flex;
+	gap: 0;
+	align-items: stretch;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	text-decoration: none;
+	color: inherit;
+	overflow: hidden;
+}
+
+.collection:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.collection img {
+	width: 120px;
+	height: 120px;
+	object-fit: cover;
+	display: block;
+	flex-shrink: 0;
+}
+
+.collection-content {
+	padding: 20px;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.collection h4 {
+	margin: 0 0 8px 0;
+	font-size: 1rem;
+	font-weight: 400;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.collection p {
+	margin: 0;
+	color: var(--gray-muted);
+	font-size: 0.85rem;
+	line-height: 1.5;
+}
+
+/* Meta and Price */
+.meta {
+	color: var(--gray-muted);
+	font-size: 0.9rem;
+	line-height: 1.6;
+}
+
+.price {
+	color: var(--black);
+	font-weight: 400;
+	font-size: 1.1rem;
+	letter-spacing: 1px;
+	margin-top: 8px;
+}
+
+/* Footer Minimalista */
+.site-footer {
+	background: var(--white);
+	border-top: 1px solid var(--gray-border);
+	padding: 40px 0;
+	margin-top: 80px;
+}
+
+.site-footer .container > div {
+	text-align: center;
+}
+
+@media (min-width: 768px) {
+	.site-footer .container > div {
+		text-align: left;
+	}
+}
+
+.site-footer p {
+	color: var(--gray-muted);
+	font-size: 13px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	margin: 0;
+}
+
+.site-footer a {
+	opacity: 0.8;
+	transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.site-footer a:hover {
+	opacity: 1;
+	color: var(--mustard-dark);
+}
+
+/* Hero Section Minimalista */
+.home-hero {
+	padding: 0;
+}
+
+.hero-inner {
+	position: relative;
+}
+
+.artist-name {
+	margin: 0 0 60px 0;
+	font-size: 4rem;
+	color: var(--black);
+	text-transform: uppercase;
+	letter-spacing: 6px;
+	font-weight: 200;
+	text-align: center;
+	position: relative;
+	padding-bottom: 20px;
+}
+
+.artist-name::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 80px;
+	height: 1px;
+	background: var(--mustard);
+}
+
+/* Video Wrapper Minimalista */
+.video-wrap {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 60px 0;
+	background: var(--black);
+	padding: 0;
+	border: none;
+}
+
+.video-wrap iframe {
+	width: 100%;
+	max-width: 1200px;
+	aspect-ratio: 16/9;
+	border: none;
+	display: block;
+}
+
+/* Welcome Box Minimalista */
+.welcome-box {
+	display: flex;
+	gap: 60px;
+	align-items: flex-start;
+	margin-top: 60px;
+	flex-direction: row;
+}
+
+.static-carousel {
+	width: 50%;
+	max-width: 600px;
+	background: var(--black);
+	padding: 0;
+	border: 1px solid var(--gray-border);
+	height: 500px;
+	overflow: hidden;
+	position: relative;
+}
+
+.static-carousel img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	object-position: center;
+	background: var(--black);
+	opacity: 0;
+	transition: opacity 0.8s ease-in-out;
+}
+
+.static-carousel img.active {
+	opacity: 1;
+}
+
+.static-carousel .carousel-indicators {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	gap: 8px;
+	z-index: 10;
+}
+
+.static-carousel .indicator {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--white);
+	opacity: 0.4;
+	cursor: pointer;
+	transition: opacity 0.3s ease, transform 0.3s ease;
+	border: none;
+}
+
+.static-carousel .indicator.active {
+	opacity: 1;
+	transform: scale(1.2);
+}
+
+.artist-bio-box {
+	width: 45%;
+	background: var(--white);
+	padding: 40px;
+	border: 1px solid var(--gray-border);
+}
+
+.artist-bio-box p {
+	margin: 0;
+	color: var(--black);
+	line-height: 1.8;
+	font-size: 1rem;
+	font-weight: 300;
+	letter-spacing: 0.5px;
+}
+
+/* News Section Minimalista */
+.news-carousel {
+	position: relative;
+	margin-top: 80px;
+}
+
+.news-carousel h2 {
+	margin-bottom: 40px;
+}
+
+.news-list {
+	position: relative;
+	min-height: 400px;
+	height: auto;
+	background: var(--white);
+	padding: 0;
+	border: 1px solid var(--gray-border);
+	overflow: hidden;
+}
+
+.news-item {
+	display: flex;
+	gap: 0;
+	align-items: stretch;
+	background: transparent;
+	padding: 0;
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity 0.6s ease;
+}
+
+.news-item.active {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+}
+
+.news-image-wrap {
+	flex: 0 0 450px;
+	max-width: 450px;
+	align-self: stretch;
+	overflow: hidden;
+	background: var(--gray-light);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.news-image-wrap img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	object-position: center;
+	display: block;
+}
+
+.news-item .news-content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 60px;
+}
+
+.news-item h3 {
+	margin: 0 0 20px 0;
+	font-size: 1.5rem;
+	font-weight: 300;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+.news-item h3 a {
+	color: var(--black);
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+.news-item h3 a:hover {
+	color: var(--mustard);
+}
+
+.news-item p {
+	margin: 0;
+	color: var(--gray-muted);
+	line-height: 1.8;
+	font-weight: 300;
+	letter-spacing: 0.5px;
+}
+
+.news-controls {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	display: flex;
+	gap: 8px;
+	z-index: 50;
+}
+
+.news-controls button {
+	background: var(--white);
+	border: 1px solid var(--gray-border);
+	color: var(--black);
+	font-size: 20px;
+	width: 44px;
+	height: 44px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
+	padding: 0;
+}
+
+.news-controls button:hover {
+	background: var(--black);
+	color: var(--white);
+	border-color: var(--black);
+}
+
+/* Lightbox Minimalista */
+.lightbox-overlay {
+	position: fixed;
+	inset: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.95);
+	z-index: 9999;
+}
+
+.lightbox-overlay.show {
+	display: flex;
+}
+
+.lightbox-overlay img {
+	max-width: 90%;
+	max-height: 90%;
+	object-fit: contain;
+}
+
+.lightbox-overlay .lb-prev,
+.lightbox-overlay .lb-next {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	color: var(--white);
+	font-size: 32px;
+	padding: 16px 20px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.lightbox-overlay .lb-prev:hover,
+.lightbox-overlay .lb-next:hover {
+	background: var(--white);
+	color: var(--black);
+	border-color: var(--white);
+}
+
+.lightbox-overlay .lb-prev {
+	left: 20px;
+}
+
+.lightbox-overlay .lb-next {
+	right: 20px;
+}
+
+.lightbox-overlay .lb-counter {
+	position: absolute;
+	bottom: 24px;
+	color: var(--white);
+	font-size: 14px;
+	letter-spacing: 1px;
+}
+
+/* Contact Form Minimalista */
+.contact-form-container {
+	background: var(--white);
+	padding: 60px;
+	border: 1px solid var(--gray-border);
+	max-width: 700px;
+	margin: 0 auto;
+}
+
+.contact-form-container h1 {
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.contact-info {
+	background: var(--gray-light);
+	padding: 40px;
+	border: 1px solid var(--gray-border);
+	margin-top: 60px;
+}
+
+.contact-info h3 {
+	margin-top: 0;
+	color: var(--black);
+	font-weight: 300;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+.contact-info p {
+	margin: 12px 0;
+	color: var(--gray-muted);
+	font-weight: 300;
+	line-height: 1.8;
+}
+
+/* Crispy Forms Minimalista */
+.form-group label {
+	font-weight: 400;
+	color: var(--black);
+	margin-bottom: 8px;
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.form-control {
+	border: 1px solid var(--gray-border);
+	border-radius: 0;
+	padding: 12px 16px;
+	font-size: 15px;
+	transition: border-color 0.3s ease;
+	background: var(--white);
+	color: var(--black);
+	font-family: inherit;
+	font-weight: 300;
+}
+
+.form-control:focus {
+	border-color: var(--black);
+	box-shadow: none;
+	outline: none;
+}
+
+.btn-primary,
+button.btn-primary,
+input[type="submit"].btn-primary {
+	background: var(--black);
+	border: 1px solid var(--black);
+	color: var(--white);
+	padding: 14px 32px;
+	font-weight: 400;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	transition: all 0.3s ease;
+	cursor: pointer;
+	font-size: 13px;
+	font-family: inherit;
+}
+
+.btn-primary:hover,
+button.btn-primary:hover,
+input[type="submit"].btn-primary:hover {
+	background: var(--white);
+	border-color: var(--black);
+	color: var(--black);
+}
+
+.alert-success {
+	background: var(--gray-light);
+	border: 1px solid var(--gray-border);
+	color: var(--black);
+	padding: 20px;
+	margin-bottom: 32px;
+	font-weight: 300;
+	letter-spacing: 0.5px;
+}
+
+/* Responsive Design */
+@media (max-width: 1280px) {
+	.news-list {
+		min-height: 250px;
+	}
+	.news-image-wrap {
+		flex: 0 0 350px;
+		max-width: 350px;
+	}
+	.news-item .news-content {
+		padding: 40px;
+	}
+}
+
+@media (max-width: 1024px) {
+	.news-list {
+		min-height: 220px;
+	}
+	.news-image-wrap {
+		flex: 0 0 300px;
+		max-width: 300px;
+	}
+}
+
+@media (max-width: 760px) {
+	main {
+		margin: 40px auto;
+		padding: 0 16px;
+	}
+
+	h1 {
+		font-size: 2rem;
+		letter-spacing: 2px;
+	}
+
+	h2 {
+		font-size: 1.5rem;
+	}
+
+	.welcome-box {
+		flex-direction: column;
+		gap: 40px;
+	}
+
+	.static-carousel,
+	.artist-bio-box {
+		width: 100%;
+	}
+
+	.static-carousel {
+		height: 400px;
+	}
+
+	.news-item {
+		flex-direction: column;
+	}
+
+	.news-image-wrap {
+		width: 100%;
+		max-width: 100%;
+		height: 300px;
+		flex: none;
+	}
+
+	.news-image-wrap img {
+		object-fit: contain;
+	}
+
+	.news-item .news-content {
+		padding: 40px 24px;
+	}
+
+	.news-list {
+		height: auto;
+		min-height: auto;
+	}
+
+	.nav {
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 16px 0;
+	}
+
+	.nav-left {
+		flex-direction: column;
+		gap: 16px;
+		width: 100%;
+	}
+
+	.grid {
+		grid-template-columns: 1fr;
+		gap: 24px;
+	}
+
+	.collection-list {
+		grid-template-columns: 1fr;
+	}
+
+	.collection {
+		flex-direction: column;
+	}
+
+	.collection img {
+		width: 100%;
+		height: 200px;
+	}
+
+	.contact-form-container {
+		padding: 40px 24px;
+	}
+
+	.artist-name {
+		font-size: 2.5rem;
+		letter-spacing: 3px;
+	}
+}

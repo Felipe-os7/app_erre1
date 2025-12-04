@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 50" width="180" height="50">
+  <!-- Texto ERRE minimalista -->
+  <text x="0" y="38" font-family="'Arial', 'Helvetica', sans-serif" font-size="42" font-weight="300" fill="#111217" letter-spacing="4">
+    ERRE
+  </text>
+  
+  <!-- Línea decorativa minimalista debajo -->
+  <line x1="0" y1="42" x2="140" y2="42" stroke="#D4A574" stroke-width="1" stroke-linecap="round"/>
+  
+  <!-- Punto decorativo minimalista -->
+  <circle cx="150" cy="42" r="2" fill="#D4A574"/>
+</svg>

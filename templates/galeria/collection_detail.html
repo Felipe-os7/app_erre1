@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static currency %}
+
+{% block content %}
+<script>
+function addToCart(itemType, itemId) {
+  fetch(`/contacto/cart/add/${itemType}/${itemId}/`, {
+    method: 'GET',
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+    },
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert(data.message);
+      if (confirm('¿Deseas ir al carrito de cotización?')) {
+        window.location.href = '{% url "contacto:contacto" %}';
+      }
+    } else {
+      alert(data.message);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Error al agregar al carrito');
+  });
+}
+</script>
+  <div style="margin-bottom: 60px;">
+    <h1>{{ collection.title }}</h1>
+    {% if collection.description %}
+      <p style="font-size: 1rem; color: var(--gray-muted); line-height: 1.8; font-weight: 300; letter-spacing: 0.5px; margin-top: 20px;">{{ collection.description }}</p>
+    {% endif %}
+  </div>
+
+  <div class="grid">
+    {% for p in paintings %}
+      <article class="card">
+        {% if p.image %}
+          <a class="lightbox" href="{{ p.image.url }}"><img src="{{ p.image.url }}" alt="{{ p.title }}"></a>
+        {% else %}
+          <img src="{% static 'img/placeholder.png' %}" alt="{{ p.title }}">
+        {% endif %}
+        <div class="card-content">
+          <h3>{{ p.title }}</h3>
+          {% if p.description %}<p class="meta">{{ p.description }}</p>{% endif %}
+          <p class="meta">{% if p.category %}{{ p.get_category_display }} • {% endif %}{% if p.technique %}Técnica: {{ p.technique }} • {% endif %}{% if p.year %}Año: {{ p.year }}{% endif %}</p>
+          {% if p.price %}
+            <p class="price">{{ p.price|clp }}</p>
+          {% endif %}
+          <p class="meta">{% if p.is_for_sale %}<strong style="color: var(--mustard-dark);">En venta</strong>{% else %}No en venta{% endif %}</p>
+          {% if p.is_for_sale %}
+            <button onclick="addToCart('painting', {{ p.id }})" class="btn btn-primary" style="margin-top: 12px; width: 100%; padding: 10px; font-size: 14px; cursor: pointer;">
+              Agregar a Cotización
+            </button>
+          {% endif %}
+          {% if user.is_authenticated %}
+            <form method="post" action="{% url 'galeria:delete_painting' p.id %}" style="margin-top: 8px;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta pintura?');">
+              {% csrf_token %}
+              <button type="submit" class="btn" style="width: 100%; padding: 8px; font-size: 12px; cursor: pointer; background-color: #dc3545; color: white; border: none;">
+                Eliminar
+              </button>
+            </form>
+          {% endif %}
+        </div>
+      </article>
+    {% empty %}
+      <div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: var(--gray-light); border-radius: 8px; border: 2px solid var(--black);">
+        <p style="font-size: 1.1rem; color: var(--gray-muted);">No hay pinturas en esta colección.</p>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if paintings.has_other_pages %}
+    <nav class="pagination">
+      {% if paintings.has_previous %}
+        <a href="?page={{ paintings.previous_page_number }}">Anterior</a>
+      {% endif %}
+      <span>Página {{ paintings.number }} de {{ paintings.paginator.num_pages }}</span>
+      {% if paintings.has_next %}
+        <a href="?page={{ paintings.next_page_number }}">Siguiente</a>
+      {% endif %}
+    </nav>
+  {% endif %}
+
+  <div style="margin-top: 60px; text-align: center;">
+    <a href="{% url 'galeria:gallery_list' %}" class="btn btn-primary" style="text-decoration: none; display: inline-block;">← Volver a Galería</a>
+  </div>
+{% endblock %}
